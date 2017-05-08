@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+    <script src="https://code.jquery.com/jquery-2.0.3.js"></script>
+</head>
+<body>
+    <select id="builds">
+    <option>Select</option>
+  </select>
+    <table>
+        <thead>
+            <th>Serial Number</th>
+            <th>SPR</th>
+            <th>Submitted</th>
+        </thead>
+        <tbody id="data">
+        </tbody>
+    </table>
+
+</body>
+<script>
+    $(document).ready(function () {
+
+        var buildVersion = [];
+        var buildDetails = [];
+        $.get("https://api.myjson.com/bins/yq1q9").then(function (response) {
+            var options = "";
+            $.each(response, function (index, value) {
+                options += "<option>" + value.buildversion + "</option>";
+                buildVersion.push(value.buildversion);
+                buildDetails.push(response[index]);
+            });
+
+            $("#builds").append(options);
+        });
+        $("#builds").on("click", function () {
+            var selectedOption = $("#builds option:selected").text();
+            var rows = "";
+            if (selectedOption !== "Select") {
+                for (var buildNumber = 0; buildNumber < buildVersion.length; buildNumber++) {
+                    if (buildVersion[buildNumber] == selectedOption) {
+                        var details = buildDetails[buildNumber];
+                        $.each(details.data, function (i, v) {
+                            console.log("print" + v['serial number']);
+                            console.log("print" + v['SPR']);
+                            console.log(v['Submitter']);
+                            rows += "<tr><td>" + v["serial number"] + "</td><td>" + v["SPR"] + "</td><td>" + v["Submitter"] + "</td><td class='status'></td></tr>";
+                        });
+                        $("#data").append(rows);
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+</html>

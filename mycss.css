@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+#header h2{
+text-align: center;
+}
+ img{
+position: relative;
+left: 20%;
+}
+	#copyright {
+		position: relative;
+		cursor: default;
+		font-family: "Source Sans Pro", Helvetica, sans-serif;
+		font-size: 0.8rem;
+		font-weight: 900;
+		letter-spacing: 0.075em;
+		line-height: 1.5;
+		text-align: center;
+		text-transform: uppercase;
+		margin: 4rem auto 8rem auto;
+		width: calc(100% - 4rem);
+		max-width: 72rem;
+		z-index: 2;
+	}
